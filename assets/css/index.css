@@ -1,0 +1,339 @@
+:root {
+  --ember-orange: #ee7e2e; /* Primary accent */
+  --light-orange: #FA9D1E; /* Lighter orange */
+  --charcoal-gray: #2e2e2e; /* Dark UI / Text */
+  --dark-gray: #181818; /* Dark Background / Text */
+  --smoked-gray: #e7e7e7; /* Light gray neutral */
+  --ash-white: #f7f7f7; /* Main background */
+  --warm-cream: #fff5e8; /* Soft warm panels/cards */
+}
+
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* gap: 1rem; */
+}
+
+body,
+main {
+  background-color: var(--ash-white);
+}
+
+main {
+  flex: 1 !important;
+  padding: 1rem !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem !important;
+  background-color: var(--smoked-gray);
+  color: var(--charcoal-gray);
+}
+
+header p {
+  font-size: 1.5rem;
+  font-weight: bold;  
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.25rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--charcoal-gray);
+}
+
+nav a:hover {
+  color: var(--ember-orange);
+}
+
+footer {
+  height: 10rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem !important;
+  background-color: var(--charcoal-gray);
+  color: var(--ash-white);
+}
+
+#index-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#index-main h1 {
+  font-size: 3.5rem;
+  color: var(--light-orange);
+}
+
+#index-main > p {
+  font-size: 2rem;
+}
+
+#index-main .team {
+  font-size: 1.2rem;
+}
+
+#index-cards {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.index-card {
+  border: 1px solid var(--smoked-gray);
+  border-radius: 0.3rem;
+  padding: 1rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+}
+
+#simulation-main {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem !important;
+    background-color: var(--warm-cream);
+}
+
+#cashier-and-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+}
+
+#cashier-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* outline: 1px solid red; */
+}
+
+#cashier-cards {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.cashier-card {
+    width: 15rem;
+    height: 15rem;
+    padding-top: 0.5rem !important;
+    border: 1px solid var(--smoked-gray);
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: white;
+}
+
+.cashier-card img {
+    width: 10rem;
+}
+
+.cashier-card button {
+    background-color: var(--smoked-gray);
+}
+
+.selected {
+    background-color: lightgreen !important;
+}
+
+#menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* outline: 1px solid red; */
+}
+
+#menu-container img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.menu-category {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 3rem;
+    background-color: var(--light-orange);
+    border-radius: 0.5rem;
+    padding: 1rem 0 1rem 0.5rem !important;
+}
+
+.menu-item-card {
+    border: 1px solid var(--smoked-gray);
+    width: 15rem;
+    height: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem !important;
+    border-radius: 0.5rem;
+    text-align: center;
+    background-color: var(--warm-cream);
+}
+
+.menu-name {
+    background-color: var(--ember-orange);
+    padding: 0.5rem !important;
+    border-radius: 0.2rem !important;
+}
+
+.add-to-order-btn {
+    padding: 0.5rem !important; 
+    border-radius: 0.2rem;
+    background-color: var(--ember-orange);
+    border-color: var(--charcoal-gray);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.add-to-order-btn:hover {
+    background-color: var(--light-orange);
+}
+
+#order-container {
+    width: 25rem;
+    max-height: 20rem;
+    position: sticky;
+    top: 1rem;
+    overflow-y: auto;
+    margin-left: 1rem !important;
+    border: 2px solid var(--ember-orange);
+    border-radius: 0.5rem;
+    padding: 0.5rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+}
+
+#order-container::-webkit-scrollbar {
+    width: 10px;
+}
+#order-container::-webkit-scrollbar-track {
+    background: var(--warm-cream);
+}
+#order-container::-webkit-scrollbar-thumb {
+    background: var(--smoked-gray);
+    border-radius: 4px;
+}
+#order-container::-webkit-scrollbar-thumb:hover {
+    background: var(--charcoal-gray);
+}
+
+
+#order-title {
+    font-size: 1.4rem;
+    border-bottom: 1px solid var(--charcoal-gray);
+    padding-bottom: 0.5rem !important;
+    text-align: center;
+}
+
+.order-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem !important;
+    border-bottom: 1px solid var(--light-orange);
+}
+
+.order-crud {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.order-main-crud {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.qty-form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.qty-form button {
+    width: 100%;
+    height: 1.5rem;
+    padding: 0 1rem 0 1rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+} 
+
+.remove-order-item-btn {
+    background-color: orangered;
+    color: var(--ash-white);
+}
+
+.add-order-item-btn {
+    background-color: rgb(0, 119, 255);
+    color: var(--ash-white);
+}
+
+.decrement-order-item-btn {
+    align-self: end;
+    background-color: var(--ember-orange);
+    color: white;
+}
+
+#total {
+    font-size: 1.5rem;
+}
+
+#submit-order-btn {
+    padding: 1rem !important;
+    width: 50%;
+    border-radius: 0.2rem;
+    font-size: 1.3rem;
+    background-color: var(--smoked-gray);
+    border: none;
+    cursor: pointer;
+}
+
+#submit-order-btn:hover {
+    background-color: lightgreen;
+}
