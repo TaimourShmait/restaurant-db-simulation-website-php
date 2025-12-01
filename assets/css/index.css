@@ -118,23 +118,25 @@ footer {
 
 #simulation-main {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 2rem;
     padding-top: 1rem !important;
     background-color: var(--warm-cream);
 }
 
-#cashier-and-menu {
+#top-row {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 2rem;
-    flex: 1;
+    /* outline: 1px solid red; */
 }
+
 
 #cashier-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    /* outline: 1px solid red; */
 }
 
 #cashier-cards {
@@ -161,8 +163,15 @@ footer {
     width: 10rem;
 }
 
-.cashier-card button {
+.cashier-card-btn {
+    cursor: pointer;
+    flex: 1;
+    width: 100%;
     background-color: var(--smoked-gray);
+}
+
+.cashier-card-btn:hover {
+    background-color: rgb(206, 206, 206);
 }
 
 .selected {
@@ -216,7 +225,7 @@ footer {
     padding: 0.5rem !important; 
     border-radius: 0.2rem;
     background-color: var(--ember-orange);
-    border-color: var(--charcoal-gray);
+    border-color: var(--ember-orange);
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -227,10 +236,10 @@ footer {
 }
 
 #order-container {
+    flex: 1;
+    align-self: center;
     width: 25rem;
     max-height: 20rem;
-    position: sticky;
-    top: 1rem;
     overflow-y: auto;
     margin-left: 1rem !important;
     border: 2px solid var(--ember-orange);
@@ -256,7 +265,6 @@ footer {
     background: var(--charcoal-gray);
 }
 
-
 #order-title {
     font-size: 1.4rem;
     border-bottom: 1px solid var(--charcoal-gray);
@@ -265,6 +273,7 @@ footer {
 }
 
 .order-item {
+    /* outline: 1px solid red; */
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -274,27 +283,36 @@ footer {
 }
 
 .order-crud {
+    /* outline: 1px solid blue; */
     display: flex;
     gap: 1rem;
+    /* gap: 1rem; */
     align-items: center;
+    justify-content: space-between; 
 }
-
+/* 
 .order-main-crud {
     flex: 1;
+    outline: 1px solid green;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
-}
-
-.qty-form {
+} 
+/* 
+.order-subtotal {
+    display: flex;
+    gap: 1rem;
     flex: 1;
+} */
+
+/* .qty-form {
+    outline: 5px solid purple;
     display: flex;
     align-items: center;
-}
-
-.qty-form button {
-    width: 100%;
+} 
+/* 
+.qty-form button, .remove-order-item-btn {
+    width: 50%;
     height: 1.5rem;
     padding: 0 1rem 0 1rem !important;
     display: flex;
@@ -302,23 +320,89 @@ footer {
     justify-content: center;
     font-weight: bold;
     cursor: pointer;
-} 
+    color: var(--ash-white);
+}  */
 
+/* --- ORDER BUTTONS --- */
+.qty-form button,
+.remove-order-item-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* decrease (-) */
+.decrement-order-item-btn {
+    background: var(--ember-orange);
+}
+
+/* increase (+) */
+.add-order-item-btn {
+    background: rgb(0, 119, 255);
+}
+
+/* remove (x) */
+.remove-order-item-btn {
+    background: #C0392B;
+}
+
+/* container spacing */
+.order-main-crud {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.order-subtotal {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* quantity text */
+.qty {
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-width: 1.5rem;
+    text-align: center;
+}
+
+/* improve alignment across the row */
+.order-crud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-item p {
+    margin-bottom: .2rem !important;
+}
+
+
+
+.remove-item-form {
+    flex: 1;
+}
+/* 
 .remove-order-item-btn {
     background-color: orangered;
-    color: var(--ash-white);
 }
 
 .add-order-item-btn {
     background-color: rgb(0, 119, 255);
-    color: var(--ash-white);
 }
 
 .decrement-order-item-btn {
-    align-self: end;
     background-color: var(--ember-orange);
-    color: white;
-}
+} */
 
 #total {
     font-size: 1.5rem;

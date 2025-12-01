@@ -192,7 +192,10 @@ if (!empty($_SESSION['currentOrder'])) {
 ?>
 
 <main id="simulation-main">
-    <div id="cashier-and-menu">
+
+    <!-- TOP ROW: CASHIER + ORDER -->
+    <div id="top-row">
+
         <div id="cashier-container">
             <h1>Select Cashier</h1>
             <div id="cashier-cards">
@@ -201,7 +204,9 @@ if (!empty($_SESSION['currentOrder'])) {
                         <img class="cashier-image" src="../assets/images/cashier.png" alt="Cashier Image">
                         <input type="hidden" name="action" value="select_cashier">
                         <input type="hidden" name="employee_id" value="<?= $cashier['employee_id'] ?>">
-                        <button type="submit" class="cashier-card <?= $_SESSION['selectedCashier'] == $cashier['employee_id'] ? 'selected' : '' ?>">
+                        <button
+                            type="submit"
+                            class="cashier-card-btn <?= $_SESSION['selectedCashier'] == $cashier['employee_id'] ? 'selected' : '' ?>">
                             <strong><?= $cashier['employee_firstname'] ?> <?= $cashier['employee_lastname'] ?></strong>
                         </button>
                     </form>
@@ -209,93 +214,98 @@ if (!empty($_SESSION['currentOrder'])) {
             </div>
         </div>
 
-        <div id="menu-container">
-            <h1>Menu</h1>
-            <?php
-            $currentMenuName = null;
-            foreach ($menuItems as $item):
+        <div id="order-container" class="<?= empty($orderCashier) ? 'hidden' : '' ?>">
+            <h2 id="order-title">
+                Current Order
+                <?php if ($orderCashier): ?>
+                    - Cashier: <?= $orderCashier['employee_firstname'] . " " . $orderCashier['employee_lastname'] ?>
+                <?php endif; ?>
+            </h2>
 
-                if ($currentMenuName !== $item['menu_name']):
-                    if ($currentMenuName !== null) echo '</div>'; // Close previous
-                    $currentMenuName = $item['menu_name'];
-            ?>
-                    <h2 class="menu-name"><?= $currentMenuName ?></h2>
-                    <div class="menu-category">
-                    <?php endif; ?>
+            <?php if (!empty($orderItems)): ?>
+                <?php foreach ($orderItems as $item): ?>
+                    <div class="order-item">
+                        <p><?= $item['menu_item_name'] ?></p>
 
-                    <div class="menu-item-card">
-                        <img src="/sqlGrill-Website/uploads/<?= $item['menu_item_image_url'] ?>" alt="<?= $item['menu_item_name'] ?>">
-                        <h3><?= $item['menu_item_name'] ?></h3>
-                        <!-- <p><?= $item['menu_item_description'] ?></p> -->
-                        <p class="price">$<?= number_format($item['menu_item_price'], 2) ?></p>
-                        <form method="POST">
-                            <input type="hidden" name="action" value="add_to_order">
-                            <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
-                            <button type="submit" class="add-to-order-btn">+ Add to Order</button>
-                        </form>
+                        <div class="order-crud">
+
+                            <div class="order-main-crud">
+                                <form method="POST" class="qty-form">
+                                    <input type="hidden" name="action" value="decrease_qty">
+                                    <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
+                                    <button type="submit" class="decrement-order-item-btn">-</button>
+                                </form>
+
+                                <span class="qty"><?= $item['quantity'] ?></span>
+
+                                <form method="POST" class="qty-form">
+                                    <input type="hidden" name="action" value="increase_qty">
+                                    <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
+                                    <button type="submit" class="add-order-item-btn">+</button>
+                                </form>
+                            </div>
+
+                            <div class="order-subtotal">
+                                <p>$<?= number_format($item['subtotal'], 2) ?></p>
+
+                                <form method="POST" class="remove-item-form">
+                                    <input type="hidden" name="action" value="remove_item">
+                                    <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
+                                    <button type="submit" class="remove-order-item-btn">x</button>
+                                </form>
+                            </div>
+
+                        </div>
                     </div>
 
                 <?php endforeach; ?>
-                    </div> <!-- FINAL CATEGORY CLOSE -->
-        </div>
-    </div>
 
-<div id="order-container" class="<?= empty($orderCashier) ? 'hidden' : '' ?>">
-        <h2 id="order-title">
-            Current Order
-            <?php if ($orderCashier): ?>
-                - Cashier: <?= $orderCashier['employee_firstname'] . " " . $orderCashier['employee_lastname'] ?>
+                <p id="total"><strong>Total: $<?= number_format($orderTotal, 2) ?></strong></p>
+
+                <form method="POST">
+                    <input type="hidden" name="action" value="submit_order">
+                    <button type="submit" id="submit-order-btn">Submit Order</button>
+                </form>
+
+            <?php else: ?>
+                <p>No items in order.</p>
             <?php endif; ?>
-        </h2>
+        </div>
 
-        <?php if (!empty($orderItems)): ?>
-            <?php foreach ($orderItems as $item): ?>
-                <div class="order-item">
-                    <p><?= $item['menu_item_name'] ?></p>
+    </div> <!-- /top-row -->
 
-                    <div class="order-crud">
+    <!-- FULL-WIDTH MENU BELOW -->
+    <div id="menu-container">
+        <h1>Menu</h1>
+        <?php
+        $currentMenuName = null;
+        foreach ($menuItems as $item):
 
-                        <div class="order-main-crud">
-                            <form method="POST" class="qty-form">
-                                <input type="hidden" name="action" value="decrease_qty">
-                                <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
-                                <button type="submit" class="decrement-order-item-btn">-</button>
-                            </form>
+            if ($currentMenuName !== $item['menu_name']):
+                if ($currentMenuName !== null) echo '</div>'; // Close previous category
+                $currentMenuName = $item['menu_name'];
+        ?>
+                <h2 class="menu-name"><?= $currentMenuName ?></h2>
+                <div class="menu-category">
+                <?php endif; ?>
 
-                            <span class="qty"><?= $item['quantity'] ?></span>
-
-                            <form method="POST" class="qty-form">
-                                <input type="hidden" name="action" value="increase_qty">
-                                <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
-                                <button type="submit" class="add-order-item-btn">+</button>
-                            </form>
-
-                        </div>
-
-                        <p>$<?= number_format($item['subtotal'], 2) ?></p>
-
-                        <form method="POST" class="qty-form">
-                            <input type="hidden" name="action" value="remove_item">
-                            <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
-                            <button type="submit" class="remove-order-item-btn">x</button>
-                        </form>
-                    </div>
+                <div class="menu-item-card">
+                    <img src="/sqlGrill-Website/uploads/<?= $item['menu_item_image_url'] ?>" alt="<?= $item['menu_item_name'] ?>">
+                    <h3><?= $item['menu_item_name'] ?></h3>
+                    <p class="price">$<?= number_format($item['menu_item_price'], 2) ?></p>
+                    <form method="POST">
+                        <input type="hidden" name="action" value="add_to_order">
+                        <input type="hidden" name="menu_item_id" value="<?= $item['menu_item_id'] ?>">
+                        <button type="submit" class="add-to-order-btn">+ Add to Order</button>
+                    </form>
                 </div>
+
             <?php endforeach; ?>
-
-            <p id="total"><strong>Total: $<?= number_format($orderTotal, 2) ?></strong></p>
-
-            <form method="POST">
-                <input type="hidden" name="action" value="submit_order">
-                <button type="submit" id="submit-order-btn">Submit Order</button>
-            </form>
-
-        <?php else: ?>
-            <p>No items in order.</p>
-        <?php endif; ?>
+                </div> <!-- FINAL CATEGORY CLOSE -->
     </div>
 
 </main>
+
 
 <?php
 require "../includes/footer.php";
