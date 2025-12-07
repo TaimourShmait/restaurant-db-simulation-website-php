@@ -7,6 +7,7 @@
     <link href="/sqlGrill-Website/assets/css/index.css" rel="stylesheet">
 </head>
 <body>
+    <div id="body">
     <header>
         <p>SQL Grill Restaurant</p>
         <nav>
@@ -16,5 +17,5 @@
             <a href="/sqlGrill-Website/pages/queries.php">Queries</a>
             <a href="/sqlGrill-Website/pages/crud.php">CRUD Forms</a>
         </nav>
-    </header>    
+    </header>
 

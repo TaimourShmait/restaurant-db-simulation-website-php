@@ -1,7 +1,7 @@
 <footer>
     <p>© American University of Science and Technology</p>
 </footer>
-
+</div>
 </body>
 
 </html>

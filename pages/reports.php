@@ -28,16 +28,16 @@ $customer_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 include "../includes/header.php";
 ?>
 
-<main id="reports-main">
+<nav id="reports-nav">
+    <a href="#employee-role-report">Employee Roles</a>
+    <a href="#employee-report">Employees</a>
+    <a href="#menu-report">Menus</a>
+    <a href="#menu-item-report">Menu Items</a>
+    <a href="#ingredient-report">Ingredients</a>
+    <a href="#customer-order-report">Customer Orders</a>
+</nav>
 
-    <nav id="report-nav">
-        <a href="#employee-role-report">Employee Roles</a>
-        <a href="#employee-report">Employees</a>
-        <a href="#menu-report">Menus</a>
-        <a href="#menu-item-report">Menu Items</a>
-        <a href="#ingredient-report">Ingredients</a>
-        <a href="#customer-order-report">Customer Orders</a>
-    </nav>
+<main id="reports-main">
 
     <div id="employee-role-report" class="table-report">
         <h2>Employee Roles</h2>

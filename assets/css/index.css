@@ -4,7 +4,7 @@
   --charcoal-gray: #2e2e2e; /* Dark UI / Text */
   --dark-gray: #181818; /* Dark Background / Text */
   --smoked-gray: #e7e7e7; /* Light gray neutral */
-  --dark-smoked-gray: #dbdbdb; 
+  --dark-smoked-gray: #dbdbdb;
   --ash-white: #f7f7f7; /* Main background */
   --warm-cream: #fff5e8; /* Soft warm panels/cards */
 }
@@ -17,14 +17,9 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
+  height: auto;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  /* gap: 1rem; */
 }
 
 body,
@@ -32,9 +27,16 @@ main {
   background-color: var(--ash-white);
 }
 
+#body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 main {
   flex: 1 !important;
   padding: 1rem !important;
+  /* overflow-y: auto; */
 }
 
 .hidden {
@@ -42,12 +44,16 @@ main {
 }
 
 header {
+  position: sticky !important;
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem !important;
   background-color: var(--smoked-gray);
   color: var(--charcoal-gray);
+  border-bottom: 1px solid var(--charcoal-gray);
 }
 
 header p {
@@ -55,18 +61,21 @@ header p {
   font-weight: bold;
 }
 
-header nav, #reports-main nav {
+header nav,
+#reports-nav {
   display: flex;
   gap: 2rem;
   font-size: 1.25rem;
 }
 
-header nav a, #reports-main nav a {
+header nav a,
+#reports-nav a {
   text-decoration: none;
   color: var(--charcoal-gray);
 }
 
-header nav a:hover, #reports-main nav a:hover {
+header nav a:hover,
+#reports-nav a:hover {
   color: var(--ember-orange);
 }
 
@@ -367,10 +376,17 @@ footer {
   background-color: lightgreen;
 }
 
+[id] {
+  scroll-margin-top: 7.5rem;
+}
+
+
 #reports-main {
+  margin-top: 1rem !important;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding-top: 0 !important;
 }
 
 #reports-main .table-report {
@@ -398,25 +414,31 @@ footer {
   padding: 1rem !important;
 }
 
-#reports-main tr:hover td {
+#reports-main tr:nth-child(even) td {
   background-color: var(--smoked-gray);
 }
 
-#reports-main tr:nth-child(even) td {
-    background-color: var(--smoked-gray);
+#reports-main tr:hover td {
+  background-color: var(--dark-smoked-gray) !important;
 }
 
-#reports-main nav {
+#reports-nav {
   position: sticky;
-  top: 1rem;
+  top: 3.9rem;
+  border-bottom: 1px solid var(--charcoal-gray);
+  z-index: 999;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem !important;
+  background-color: var(--smoked-gray);
 }
 
 #reports-main nav a {
   background-color: var(--smoked-gray);
   flex: 1;
   text-align: center;
-  padding: 1rem !important; 
+  padding: 1rem !important;
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
