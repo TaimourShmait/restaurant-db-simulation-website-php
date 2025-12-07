@@ -4,6 +4,7 @@
   --charcoal-gray: #2e2e2e; /* Dark UI / Text */
   --dark-gray: #181818; /* Dark Background / Text */
   --smoked-gray: #e7e7e7; /* Light gray neutral */
+  --dark-smoked-gray: #dbdbdb; 
   --ash-white: #f7f7f7; /* Main background */
   --warm-cream: #fff5e8; /* Soft warm panels/cards */
 }
@@ -54,18 +55,18 @@ header p {
   font-weight: bold;
 }
 
-nav {
+header nav, #reports-main nav {
   display: flex;
   gap: 2rem;
   font-size: 1.25rem;
 }
 
-nav a {
+header nav a, #reports-main nav a {
   text-decoration: none;
   color: var(--charcoal-gray);
 }
 
-nav a:hover {
+header nav a:hover, #reports-main nav a:hover {
   color: var(--ember-orange);
 }
 
@@ -364,4 +365,60 @@ footer {
 
 #submit-order-btn:hover {
   background-color: lightgreen;
+}
+
+#reports-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#reports-main .table-report {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#reports-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem !important;
+  background-color: var(--ash-white);
+}
+
+#reports-main th {
+  background-color: var(--charcoal-gray);
+  text-align: left;
+  padding: 1rem !important;
+  color: var(--ash-white);
+}
+
+#reports-main td {
+  padding: 1rem !important;
+}
+
+#reports-main tr:hover td {
+  background-color: var(--smoked-gray);
+}
+
+#reports-main tr:nth-child(even) td {
+    background-color: var(--smoked-gray);
+}
+
+#reports-main nav {
+  position: sticky;
+  top: 1rem;
+  width: 100%;
+}
+
+#reports-main nav a {
+  background-color: var(--smoked-gray);
+  flex: 1;
+  text-align: center;
+  padding: 1rem !important; 
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
