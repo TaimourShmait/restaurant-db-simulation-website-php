@@ -2,6 +2,7 @@
   --ember-orange: #ee7e2e; /* Primary accent */
   --light-orange: #fa9d1e; /* Lighter orange */
   --charcoal-gray: #2e2e2e; /* Dark UI / Text */
+  --light-charcoal-gray: #3a3a3a;
   --dark-gray: #181818; /* Dark Background / Text */
   --smoked-gray: #e7e7e7; /* Light gray neutral */
   --dark-smoked-gray: #dbdbdb;
@@ -56,6 +57,10 @@ header {
   border-bottom: 1px solid var(--charcoal-gray);
 }
 
+nav a {
+  text-decoration: none;
+}
+
 header p {
   font-size: 1.5rem;
   font-weight: bold;
@@ -68,15 +73,13 @@ header nav,
   font-size: 1.25rem;
 }
 
-header nav a,
-#reports-nav a {
-  text-decoration: none;
+header nav a {
   color: var(--charcoal-gray);
 }
 
 header nav a:hover,
 #reports-nav a:hover {
-  color: var(--ember-orange);
+  color: var(--ember-orange) !important;
 }
 
 footer {
@@ -380,7 +383,6 @@ footer {
   scroll-margin-top: 7.5rem;
 }
 
-
 #reports-main {
   margin-top: 1rem !important;
   display: flex;
@@ -404,7 +406,7 @@ footer {
 }
 
 #reports-main th {
-  background-color: var(--charcoal-gray);
+  background-color: var(--light-charcoal-gray);
   text-align: left;
   padding: 1rem !important;
   color: var(--ash-white);
@@ -431,16 +433,54 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 1rem !important;
-  background-color: var(--smoked-gray);
+  background-color: var(--charcoal-gray);
+  color: var(--ash-white) !important;
 }
 
-#reports-main nav a {
-  background-color: var(--smoked-gray);
+#reports-nav a {
   flex: 1;
   text-align: center;
-  padding: 1rem !important;
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--ash-white) !important;
+}
+
+#queries-main {
+  display: flex;
+  padding: 0 !important;
+}
+
+#queries-side-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem !important;
+  border-right: 1px solid var(--smoked-gray);
+  background-color: var(--smoked-gray);
+}
+
+#queries-side-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#queries-side-container h2 {
+  padding-left: 1rem !important;
+}
+
+#queries-side-nav a {
+  color: var(--charcoal-gray);
+  padding: 1rem !important;
+  border-radius: 0.5rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#queries-side-nav a:hover,
+.query-selected {
+  background-color: var(--light-charcoal-gray);
+  color: var(--ash-white);
 }
