@@ -15,7 +15,7 @@
             <a href="/sqlGrill-Website/pages/simulation.php">Simulation</a>
             <a href="/sqlGrill-Website/pages/reports.php">Reports</a>
             <a href="/sqlGrill-Website/pages/queries.php">Queries</a>
-            <a href="/sqlGrill-Website/pages/crud.php">CRUD Forms</a>
+            <!-- <a href="/sqlGrill-Website/pages/crud.php">CRUD Forms</a> -->
         </nav>
     </header>
 
