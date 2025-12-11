@@ -1,158 +1,98 @@
 <?php
 include "../includes/db.php";
-
-$stmt = $pdo->prepare("SELECT * FROM employee_role");
-$stmt->execute();
-$employee_roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$stmt = $pdo->prepare("SELECT * FROM employee");
-$stmt->execute();
-$employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$stmt = $pdo->prepare("SELECT * FROM menu");
-$stmt->execute();
-$menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$stmt = $pdo->prepare("SELECT * FROM menu_item");
-$stmt->execute();
-$menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$stmt = $pdo->prepare("SELECT * FROM ingredient");
-$stmt->execute();
-$ingredients = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$stmt = $pdo->prepare("SELECT * FROM customer_order");
-$stmt->execute();
-$customer_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 include "../includes/header.php";
+
+$report = $_GET['r'] ?? 'employee_roles';
+
+function fetchTable($pdo, $tableName)
+{
+    $stmt = $pdo->prepare("SELECT * FROM $tableName");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function renderTable($title, $data)
+{
+    if (empty($data)) {
+        echo "<div class='report-card'><h2>$title</h2><p>No data found.</p></div>";
+        return;
+    }
+
+    echo "<div class='report-card'>";
+    echo "<h2>$title</h2>";
+    echo "<p class='report-meta'>Total Records: " . count($data) . "</p>";
+    echo "<table>";
+
+    echo "<tr>";
+    foreach (array_keys($data[0]) as $col) {
+        echo "<th>" . $col . "</th>";
+    }
+    echo "</tr>";
+
+    foreach ($data as $row) {
+        echo "<tr>";
+        foreach ($row as $val) {
+            echo "<td>" . $val . "</td>";
+        }
+        echo "</tr>";
+    }
+
+    echo "</table>";
+    echo "</div>";
+}
+
+switch ($report) {
+    case 'employee_roles':
+        $data = fetchTable($pdo, "employee_role");
+        $title = "Employee Roles";
+        break;
+
+    case 'employees':
+        $data = fetchTable($pdo, "employee");
+        $title = "Employees";
+        break;
+
+    case 'menus':
+        $data = fetchTable($pdo, "menu");
+        $title = "Menus";
+        break;
+
+    case 'menu_items':
+        $data = fetchTable($pdo, "menu_item");
+        $title = "Menu Items";
+        break;
+
+    case 'ingredients':
+        $data = fetchTable($pdo, "ingredient");
+        $title = "Ingredients";
+        break;
+
+    case 'customer_orders':
+        $data = fetchTable($pdo, "customer_order");
+        $title = "Customer Orders";
+        break;
+
+    default:
+        $data = [];
+        $title = "Unknown Report";
+        break;
+}
 ?>
 
-<nav id="reports-nav">
-    <a href="#employee-role-report">Employee Roles</a>
-    <a href="#employee-report">Employees</a>
-    <a href="#menu-report">Menus</a>
-    <a href="#menu-item-report">Menu Items</a>
-    <a href="#ingredient-report">Ingredients</a>
-    <a href="#customer-order-report">Customer Orders</a>
-</nav>
+<main id="reports-layout">
 
-<main id="reports-main">
-
-    <div id="employee-role-report" class="table-report">
-        <h2>Employee Roles</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Role Name</th>
-            </tr>
-            <?php foreach ($employee_roles as $role): ?>
-                <tr>
-                    <td><?= $role['employee_role_id'] ?></td>
-                    <td><?= $role['employee_role_name'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+    <div id="reports-sidebar">
+        <h3>Reports</h3>
+        <a href="reports.php?r=employee_roles" class="<?= $report == 'employee_roles' ? 'active' : '' ?>">Employee Roles</a>
+        <a href="reports.php?r=employees" class="<?= $report == 'employees' ? 'active' : '' ?>">Employees</a>
+        <a href="reports.php?r=menus" class="<?= $report == 'menus' ? 'active' : '' ?>">Menus</a>
+        <a href="reports.php?r=menu_items" class="<?= $report == 'menu_items' ? 'active' : '' ?>">Menu Items</a>
+        <a href="reports.php?r=ingredients" class="<?= $report == 'ingredients' ? 'active' : '' ?>">Ingredients</a>
+        <a href="reports.php?r=customer_orders" class="<?= $report == 'customer_orders' ? 'active' : '' ?>">Customer Orders</a>
     </div>
 
-    <div id="employee-report" class="table-report">
-        <h2>Employees</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Role ID</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Manager ID</th>
-            </tr>
-            <?php foreach ($employees as $employee): ?>
-                <tr>
-                    <td><?= $employee['employee_id'] ?></td>
-                    <td><?= $employee['employee_firstname'] ?></td>
-                    <td><?= $employee['employee_lastname'] ?></td>
-                    <td><?= $employee['employee_role_id'] ?></td>
-                    <td><?= $employee['employee_phone'] ?></td>
-                    <td><?= $employee['employee_email'] ?></td>
-                    <td><?= $employee['employee_manager_id'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-
-    <div id="menu-report" class="table-report">
-        <h2>Menus</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Menu Name</th>
-            </tr>
-            <?php foreach ($menus as $menu): ?>
-                <tr>
-                    <td><?= $menu['menu_id'] ?></td>
-                    <td><?= $menu['menu_name'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-
-    <div id="menu-item-report" class="table-report">
-        <h2>Menu Items</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Menu ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-            </tr>
-            <?php foreach ($menu_items as $item): ?>
-                <tr>
-                    <td><?= $item['menu_item_id'] ?></td>
-                    <td><?= $item['menu_id'] ?></td>
-                    <td><?= $item['menu_item_name'] ?></td>
-                    <td><?= $item['menu_item_description'] ?></td>
-                    <td><?= number_format($item['menu_item_price'], 2) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-
-    <div id="ingredient-report" class="table-report">
-        <h2>Ingredients</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-            </tr>
-            <?php foreach ($ingredients as $ingredient): ?>
-                <tr>
-                    <td><?= $ingredient['ingredient_id'] ?></td>
-                    <td><?= $ingredient['ingredient_name'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-
-    <div id="customer-order-report" class="table-report">
-        <h2>Customer Orders</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Employee ID</th>
-                <th>Date</th>
-                <th>Total Price</th>
-            </tr>
-            <?php foreach ($customer_orders as $order): ?>
-                <tr>
-                    <td><?= $order['customer_order_id'] ?></td>
-                    <td><?= $order['employee_id'] ?></td>
-                    <td><?= $order['customer_order_datetime'] ?></td>
-                    <td><?= number_format($order['customer_order_total_price'], 2) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+    <div id="reports-content">
+        <?php renderTable($title, $data); ?>
     </div>
 
 </main>
