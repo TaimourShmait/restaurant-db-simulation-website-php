@@ -192,8 +192,6 @@ if (!empty($_SESSION['currentOrder'])) {
 ?>
 
 <main id="simulation-main">
-
-    <!-- TOP ROW: CASHIER + ORDER -->
     <div id="top-row">
 
         <div id="cashier-container">
@@ -272,9 +270,8 @@ if (!empty($_SESSION['currentOrder'])) {
             <?php endif; ?>
         </div>
 
-    </div> <!-- /top-row -->
+    </div>
 
-    <!-- FULL-WIDTH MENU BELOW -->
     <div id="menu-container">
         <h1>Menu</h1>
         <?php
@@ -301,7 +298,7 @@ if (!empty($_SESSION['currentOrder'])) {
                 </div>
 
             <?php endforeach; ?>
-                </div> <!-- FINAL CATEGORY CLOSE -->
+                </div>
     </div>
 
 </main>
