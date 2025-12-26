@@ -1,5 +1,5 @@
 <footer>
-    <p>© American University of Science and Technology</p>
+    <p>© Copyright!!!</p>
 </footer>
 </div>
 </body>
