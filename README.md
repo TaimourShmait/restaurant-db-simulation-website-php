@@ -1,6 +1,6 @@
 # SQL Grill Restaurant Simulation System (PHP/MySQL)
 
-PHP/MySQL restaurant simulation and order management system inspired by fast-food POS workflows. Features a fully normalized relational database, cashier-based order simulation, live order building, menu rendering, reports and SQL query sandbox pages, and admin-style CRUD interfaces. Built with pure PHP (no frameworks), raw SQL, and minimal frontend styling. Demonstrates database design, relational integrity, reporting, and practical POS-style UI logic.
+PHP/MySQL restaurant simulation and order management system inspired by fast-food POS workflows. Features a fully normalized relational database, cashier-based order simulation, live order building, menu rendering, reports and SQL query sandbox pages, and admin-style interfaces. Built with pure PHP (no frameworks), raw SQL, and minimal frontend styling. Demonstrates database design, relational integrity, reporting, and practical POS-style UI logic.
 
 ## Prerequisites
 
