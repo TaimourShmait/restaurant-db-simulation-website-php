@@ -4,7 +4,7 @@ require "includes/header.php";
 ?>
 
 <main id="index-main">
-    <h1>Database Systems Lab Expo Project</h1>
+    <h1>Database Systems Project</h1>
     <p>An interactive restaurant simulation system built for the Fall 2025–2026 Database Systems Lab.</p>
 
     <div id="index-cards">
@@ -30,7 +30,7 @@ require "includes/header.php";
         </div>
     </div>
 
-    <p class="team">Developed by: Maher Abou Farraj, Pascal Ayoub, Tarek Hajjar, and Taimour Shmait</p>
+    <p class="team">Developed by Taimour Shmait</p>
 
 </main>
 
